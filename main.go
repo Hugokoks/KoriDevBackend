@@ -51,6 +51,15 @@ func main() {
 	})
 
 	/////ROUTES
+	
+	// ===== HEALTHCHECK ENDPOINT =====
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "ok",
+			"message": "Backend is healthy 🚀",
+		})
+	})
+
 	router.Message(api)
 
 	r.Run()
