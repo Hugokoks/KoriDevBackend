@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"koridev/cors"
 	"koridev/ratelimiter"
@@ -62,5 +63,12 @@ func main() {
 
 	router.Message(api)
 
-	r.Run()
+	port := os.Getenv("PORT")
+	if port == "" {
+	    port = "8080"
+	}
+	println("✅ Starting server on port:", port)
+	if err := r.Run(":" + port); err != nil {
+	    panic(err)
+	}
 }
