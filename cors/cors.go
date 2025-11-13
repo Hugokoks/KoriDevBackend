@@ -16,6 +16,7 @@ func SetupCors() gin.HandlerFunc {
 		clientURL = "http://localhost:5173"
 		println("⚠️  CLIENT_URL nebyla nastavena, používám default:", clientURL)
 	}
+	///clientURL = strings.TrimRight(clientURL, "/")
 
 	config := cors.Config{
 		AllowOrigins:     []string{clientURL},

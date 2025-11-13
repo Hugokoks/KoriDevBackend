@@ -22,7 +22,22 @@ func main() {
 
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
+	/////debuging cors
+	r.Use(func(c *gin.Context) {
+    origin := c.Request.Header.Get("Origin")
+    method := c.Request.Method
+    path := c.Request.URL.Path
 
+    if origin != "" {
+        println("🌍 Incoming request:",
+            "Origin =", origin,
+            "| Method =", method,
+            "| Path =", path,
+        )
+    }
+
+    c.Next()
+	})
 	// ----- CORS -----
 	r.Use(cors.SetupCors())
 	r.SetTrustedProxies(nil)
